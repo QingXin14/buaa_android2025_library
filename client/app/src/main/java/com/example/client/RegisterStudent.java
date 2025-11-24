@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,22 @@ public class RegisterStudent extends AppCompatActivity {
                 } else {
                     List<Student> studentsAccount = AppDataBase.getInstance(RegisterStudent.this).studentDao().getAll();
                     boolean differ = true;
+                    for(int i=0; i< studentsAccount.size(); i++) {
+                        if (studentsAccount.get(i).account.equals(editAccount.getText().toString())) {
+                            Toast.makeText(RegisterStudent.this, "账号已存在", Toast.LENGTH_SHORT).show();
+                            differ = false;
+                            break;
+                        }
+                    }
+                    if (editPassword1.getText().toString().equals(editPassword2.getText().toString())) {
+                        Student student = new Student(editAccount.getText().toString(), editPassword1.getText().toString(), editName.getText().toString(), "");
+                        AppDataBase.getInstance(RegisterStudent.this).studentDao().insertAll(student);
+                        Toast.makeText(RegisterStudent.this, "注册成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterStudent.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(RegisterStudent.this,"两次密码不相同",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
