@@ -12,8 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Client">
         <activity
+            android:name=".RegisterStudent"
+            android:exported="false" />
+        <activity
+            android:name=".LoginStaff"
+            android:exported="false" />
+        <activity
+            android:name=".LoginStudent"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.Client">
             <intent-filter>
